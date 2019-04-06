@@ -7,9 +7,9 @@ exports.up = function(knex, Promise) {
       .notNullable()
       .unique("uq_project_name");
     //description
-    tbl.string("description").notNullable();
+    tbl.text("description").notNullable();
     //complete
-    tbl.boolean("complete");
+    tbl.boolean("complete").defaultTo(false);
   });
 };
 

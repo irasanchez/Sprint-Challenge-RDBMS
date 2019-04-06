@@ -1,10 +1,10 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable("actions", function(tbl) {
-    tbl.increments(); // pass the name if you wanted to be called anything other than id
+    tbl.increments();
     tbl.string("name", 100).notNullable();
-    tbl.string("description", 245).notNullable();
-    tbl.string("notes", 245);
-    tbl.boolean("complete");
+    tbl.text("description", 245).notNullable();
+    tbl.text("notes", 245);
+    tbl.boolean("complete").defaultTo(false);
     tbl
       .integer("project_id")
       .unsigned()
