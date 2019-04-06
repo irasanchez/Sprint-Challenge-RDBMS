@@ -9,10 +9,15 @@ module.exports = {
     return query;
   },
   addAction: function(action) {
-    return db("actions")
-      .insert(action)
-      .then(ids => {
-        id: ids[0];
-      });
+    if (action.name) {
+      return db("actions")
+        .insert(action)
+        .then(ids => {
+          id: ids[0];
+          getAction(ids[0]);
+        });
+    } else {
+      return "Error: needs name";
+    }
   }
 };

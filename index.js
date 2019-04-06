@@ -36,6 +36,25 @@ server.get("/api/projects", async (req, res) => {
   }
 });
 
+server.get("/api/projects/:id", (req, res) => {
+  try {
+    const { id } = req.params;
+
+    projectHelpers.getProject(id).then(project => {
+      if (project) {
+        db("actions")
+          .where("actions.project_id", id)
+          .then(actions => {
+            project.actions = actions;
+            res.status(200).json(project);
+          });
+      }
+    });
+  } catch (error) {
+    error => res.status(500).json(error);
+  }
+});
+
 //actions
 server.post("/api/actions", async (req, res) => {
   try {

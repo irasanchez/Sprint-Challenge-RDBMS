@@ -4,7 +4,10 @@ exports.up = function(knex, Promise) {
     tbl.string("name", 100).notNullable();
     tbl.text("description", 245).notNullable();
     tbl.text("notes", 245);
-    tbl.boolean("complete").defaultTo(false);
+    tbl
+      .boolean("complete")
+      .defaultTo(false)
+      .notNullable();
     tbl
       .integer("project_id")
       .unsigned()
